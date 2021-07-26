@@ -8,14 +8,14 @@ var corsOptions = {
 };
 
 //connect method to db
-const db = require('./app/models');
+const db = require('./models/init.models');
 db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('connected to database');
 }).catch(err => {
     console.log('problem connecting to db', err); process.exit;
 });
 
-
+require('./routes/user.routes')(app);
 app.use(cors(corsOptions));
 
 //app.use(express.urlencoded({ extended: true }));
