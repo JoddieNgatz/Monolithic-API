@@ -12,11 +12,12 @@ var corsOptions = {
 
 //connect method to db
 const db = require('./models/init.models');
-db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-    console.log('connected to database');
-}).catch(err => {
-    console.log('problem connecting to db', err); process.exit;
-});
+console.log("connecting to db")
+ db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+        console.log('connected to database');
+    }).catch(err => {
+        console.log('problem connecting to db', err); process.exit;
+    });
 
 
 app.use(cors(corsOptions));
