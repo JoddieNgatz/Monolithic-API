@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const auth = require('../config/auth.config');
-const db = require('../models');
+const db = require('../models/init.models');
 const user = db.user;
 authToken = (req, res, next) => {
     let token = req.headers["x-access-token"];

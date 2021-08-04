@@ -1,0 +1,8 @@
+{
+    "name": "Monolithic API for Sign In and Register",
+    "version": "1.0.0",
+    "description": "API sign In /register using jwt, ",
+    "template": {
+        "forceLanguage": "en"
+    }
+}

@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+//var bodyParser = require('body-parser');
+
+//var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const app = express();
 
@@ -15,12 +18,28 @@ db.mongoose.connect(db.url, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log('problem connecting to db', err); process.exit;
 });
 
-require('./routes/user.routes')(app);
+
 app.use(cors(corsOptions));
 
-//app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//app.use(express.bodyParser());
+
+require('./routes/user.routes')(app);
+  /**
+ * @api {get} /
+ * @apiGroup Sroot
+ * @apiSuccess {API Working Welcome} 
+ * @apiSuccess {}
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    [{
+ *      message: "API working Welcome."
+ *    }]
+ * @apiErrorExample {json} List error
+ *    HTTP/1.1 500 Internal Server Error
+ */ 
 app.get("/", (req, res) => {
     res.status(200).json({ mesaage: "API working Welcome." });
 

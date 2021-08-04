@@ -1,10 +1,11 @@
 {
   "name": "microservice-crud-api",
   "version": "1.0.0",
-  "description": "Microservice architecture CRUD API",
+  "description": "Monolithic architecture CRUD SignIn/SignUP API",
   "main": "server.js",
   "scripts": {
     "start": "node server",
+    "docs": "apidoc -i routes/ -o apidoc/",
     "dev": "nodemon server"
   },
   "repository": {
@@ -25,9 +26,13 @@
   },
   "homepage": "https://github.com/JoddieNgatz/MicroService-CRUD-API#readme",
   "dependencies": {
+    "-": "^0.0.1",
+    "apidoc": "^0.28.1",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "g": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.3"
   },
