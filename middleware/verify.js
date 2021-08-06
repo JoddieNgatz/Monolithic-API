@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const auth = require('../config/auth.config');
 const db = require('../models/init.models');
 const user = db.user;
-authToken = (req, res, next) => {
+
+module.exports.authToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
     if (!token) {
         return res.status(403).send({ message: "No token provided" });
@@ -17,7 +18,7 @@ authToken = (req, res, next) => {
     });
 };
 
-checkDuplicateUserOnSignUp = (req, res, next) => {
+module.exports.checkDuplicateUserOnSignUp = (req, res, next) => {
     user.findOne({
         email: req.body.email
     }).exec((err, user) => {
@@ -36,4 +37,4 @@ checkDuplicateUserOnSignUp = (req, res, next) => {
 // const verif = {
 //     checkDuplicateUserOnSignUp, authToken
 // }
-module.exports = checkDuplicateUserOnSignUp, authToken;
+//module.exports = checkDuplicateUserOnSignUp, authToken;

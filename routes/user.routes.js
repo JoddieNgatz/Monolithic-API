@@ -1,5 +1,5 @@
-const controllerMiddleware = require("../controllers/SignInUp.Controller");
-
+const controller = require("../controllers/SignInUp.Controller");
+const middleware =require('../middleware/verify')
 module.exports = function(app) {
     app.use(function(req, res, next) {
       res.header(
@@ -33,8 +33,10 @@ module.exports = function(app) {
  * @apiErrorExample {json} Register error
  *    HTTP/1.1 500 Internal Server Error
  */
-    //app.post('/register', [verify.checkDuplicateUserOnSignUp], controllerMiddleware.register);
-    app.post('/register', controllerMiddleware.register);
+    //app.post('/register', [middleware.checkDuplicateUserOnSignUp], controllerMiddleware.register);
+    // app.post('/register', [middleware.checkDuplicateUserOnSignUp],
+    //   controller.register);
+      app.post('/register', controller.register);
   
   
     
@@ -59,5 +61,32 @@ module.exports = function(app) {
  * @apiErrorExample {json} SignIn error
  *    HTTP/1.1 500 Internal Server Error
  */
-  app.post('/signIn', controllerMiddleware.signIn);
+  app.post('/signIn', controller.signIn);
+
+
+     
+/**
+ * @api {get} /signIn signIn
+ * @apiGroup SignInUp
+ * @apiParam {String} SignIn
+ * @apiParamExample {json} Input
+ *    {
+ *      "username": "joe"
+ *      "password": "1*2£456^*"
+ *      "accesToken": "*****"
+ *    }
+ * @apiSuccess {String} username
+ * @apiSuccess {String} password
+ * @apiSuccessExample {json} Success
+ *    HTTP/1.1 200 OK
+ *    {
+ *      message: "signed In"
+ *      "username": "joe"
+ *      "password": "1*2£456^*"
+ *       "accesToken":"token"
+ *    }
+ * @apiErrorExample {json} SignIn error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+ app.get('/signIn', [middleware.authToken],controller.signIn);
 }

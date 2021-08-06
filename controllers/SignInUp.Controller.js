@@ -55,11 +55,16 @@ exports.signIn = (req, res) => {
                     message: 'Invalid Passowrd'
                 });
             } else {
+
+                var token = jwt.sign({ id: user.id }, auth.secret, {
+                    expiresIn: 5400 // 24 hours
+                  });
         
                 res.status(200).json({
                     message: "Logged In",
-                    name: user.username,
+                    username: user.username,
                     email: user.email,
+                    accessToken: token,
                 });
             }
         });
