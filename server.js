@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 //var bodyParser = require('body-parser');
-
+const helmet = require("helmet");
 //var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const app = express();
@@ -18,8 +18,9 @@ console.log("connecting to db")
     }).catch(err => {
         console.log('problem connecting to db', err); process.exit;
     });
-
-
+    
+app.use(helmet());
+app.disable('x-powered-by');
 app.use(cors(corsOptions));
 
 app.use(express.urlencoded({ extended: false }));
